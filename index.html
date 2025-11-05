@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Flutter SDK Exam Answers</title>
+  <style>
+    body {
+      font-family: "Segoe UI", Arial, sans-serif;
+      background-color: #f9fafb;
+      color: #222;
+      line-height: 1.6;
+      margin: 0;
+      padding: 20px;
+    }
+
+    h1, h2, h3 {
+      color: #004aad;
+    }
+
+    pre {
+      background-color: #f4f4f4;
+      padding: 12px;
+      border-radius: 8px;
+      overflow-x: auto;
+      border: 1px solid #ddd;
+    }
+
+    code {
+      font-family: Consolas, monospace;
+      color: #d63384;
+    }
+
+    section {
+      background: white;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.05);
+      padding: 20px;
+      margin-bottom: 25px;
+    }
+
+    ul {
+      margin-left: 20px;
+    }
+
+    hr {
+      border: none;
+      border-top: 2px solid #eee;
+      margin: 30px 0;
+    }
+
+    .question {
+      font-weight: bold;
+      color: #1a1a1a;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Flutter SDK Exam Answers</h1>
+
+  <section>
+    <h2>1(a) Explain Installing Flutter SDK in our systems</h2>
+    <p class="question">Steps:</p>
+    <ul>
+      <li><strong>Download Flutter SDK:</strong><br>
+      Go to <a href="https://flutter.dev/docs/get-started/install" target="_blank">https://flutter.dev/docs/get-started/install</a><br>
+      Choose your operating system (Windows, macOS, or Linux) and download the SDK.</li>
+
+      <li><strong>Extract the ZIP file:</strong><br>
+      Extract it to a suitable location, e.g. <code>C:\src\flutter</code> (avoid paths with spaces).</li>
+
+      <li><strong>Set Environment Variable:</strong><br>
+      Add the Flutter bin path to system environment variables:<br>
+      <code>C:\src\flutter\bin</code></li>
+
+      <li><strong>Run Flutter Doctor:</strong><br>
+      Open Command Prompt and type:<br>
+      <code>flutter doctor</code><br>
+      This checks for dependencies (Dart SDK, Android Studio, VS Code, etc.).</li>
+
+      <li><strong>Install Android Studio (Optional):</strong><br>
+      For Android app development, install Android Studio and SDK tools.</li>
+
+      <li><strong>Run Flutter Doctor Again:</strong><br>
+      Ensure all checks are marked with ✔️</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>1(b) Simple Dart Program</h2>
+    <pre><code>void main() {
+  int a = 10;
+  double b = 5.5;
+  String name = "Flutter";
+  bool isLearning = true;
+
+  print("Name: $name");
+  print("Sum: ${a + b}");
+  print("Learning Flutter: $isLearning");
+}</code></pre>
+  </section>
+
+  <section>
+    <h2>2(a) Program to Create Custom Widget</h2>
+    <pre><code>import 'package:flutter/material.dart';
+
+void main() => runApp(MyApp());
+
+class MyApp extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(home: Scaffold(body: Center(child: CustomButton())));
+  }
+}
+
+class CustomButton extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return ElevatedButton(
+      style: ElevatedButton.styleFrom(
+        backgroundColor: Colors.teal,
+        padding: EdgeInsets.all(16),
+      ),
+      onPressed: () {},
+      child: Text('Click Me', style: TextStyle(fontSize: 20)),
+    );
+  }
+}</code></pre>
+  </section>
+
+  <section>
+    <h2>2(b) Hello World App</h2>
+    <pre><code>import 'package:flutter/material.dart';
+
+void main() => runApp(MyApp());
+
+class MyApp extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(home: Scaffold(body: Center(child: Text('Hello World'))));
+  }
+}</code></pre>
+  </section>
+
+  <section>
+    <h2>3(a) Program Applying Styling using Themes</h2>
+    <pre><code>import 'package:flutter/material.dart';
+
+void main() => runApp(MyApp());
+
+class MyApp extends StatelessWidget {
+  final ThemeData theme = ThemeData(
+    primarySwatch: Colors.indigo,
+    textTheme: TextTheme(bodyMedium: TextStyle(fontSize: 22, color: Colors.black)),
+  );
+
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      theme: theme,
+      home: Scaffold(
+        appBar: AppBar(title: Text('Custom Theme Example')),
+        body: Center(child: Text('Hello Flutter!', style: theme.textTheme.bodyMedium)),
+      ),
+    );
+  }
+}</code></pre>
+  </section>
+
+  <section>
+    <h2>4(a) Add Animations using Flutter Animation Framework</h2>
+    <pre><code>import 'package:flutter/material.dart';
+
+void main() => runApp(MyApp());
+
+class MyApp extends StatefulWidget {
+  @override
+  _MyAppState createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> with SingleTickerProviderStateMixin {
+  late AnimationController _controller;
+  late Animation<double> _animation;
+
+  @override
+  void initState() {
+    super.initState();
+    _controller = AnimationController(vsync: this, duration: Duration(seconds: 2));
+    _animation = Tween<double>(begin: 0, end: 300).animate(_controller);
+    _controller.repeat(reverse: true);
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      home: Scaffold(
+        body: Center(
+          child: AnimatedBuilder(
+            animation: _animation,
+            builder: (context, child) {
+              return Container(width: _animation.value, height: _animation.value, color: Colors.blue);
+            },
+          ),
+        ),
+      ),
+    );
+  }
+}</code></pre>
+  </section>
+
+  <section>
+    <h2>5(a) Fade Animation in Flutter</h2>
+    <pre><code>import 'package:flutter/material.dart';
+
+void main() => runApp(MyApp());
+
+class MyApp extends StatefulWidget {
+  @override
+  _MyAppState createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> with SingleTickerProviderStateMixin {
+  late AnimationController _controller;
+  late Animation<double> _fadeAnimation;
+
+  @override
+  void initState() {
+    super.initState();
+    _controller = AnimationController(vsync: this, duration: Duration(seconds: 2));
+    _fadeAnimation = Tween<double>(begin: 0.0, end: 1.0).animate(_controller);
+    _controller.repeat(reverse: true);
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      home: Scaffold(
+        body: Center(
+          child: FadeTransition(
+            opacity: _fadeAnimation,
+            child: Text('Fading Text', style: TextStyle(fontSize: 30)),
+          ),
+        ),
+      ),
+    );
+  }
+}</code></pre>
+  </section>
+
+  <section>
+    <h2>6(a) Layouts using Row, Column, and Stack Widgets</h2>
+    <pre><code>import 'package:flutter/material.dart';
+
+void main() => runApp(MyApp());
+
+class MyApp extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      home: Scaffold(
+        body: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Icon(Icons.home, size: 40),
+                Icon(Icons.star, size: 40),
+              ],
+            ),
+            Stack(
+              alignment: Alignment.center,
+              children: [
+                Container(width: 100, height: 100, color: Colors.blue),
+                Text('Stack', style: TextStyle(color: Colors.white, fontSize: 20)),
+              ],
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}</code></pre>
+  </section>
+
+  <section>
+    <h2>7(a) Slide Animation in Flutter</h2>
+    <pre><code>import 'package:flutter/material.dart';
+
+void main() => runApp(MyApp());
+
+class MyApp extends StatefulWidget {
+  @override
+  _MyAppState createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> with SingleTickerProviderStateMixin {
+  late AnimationController _controller;
+  late Animation&lt;Offset&gt; _slideAnimation;
+
+  @override
+  void initState() {
+    super.initState();
+    _controller = AnimationController(vsync: this, duration: Duration(seconds: 2));
+    _slideAnimation = Tween&lt;Offset&gt;(begin: Offset(-1, 0), end: Offset(0, 0)).animate(_controller);
+    _controller.forward();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      home: Scaffold(
+        body: Center(
+          child: SlideTransition(
+            position: _slideAnimation,
+            child: Container(
+              width: 150,
+              height: 150,
+              color: Colors.orange,
+              child: Center(child: Text('Slide Animation')),
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+}</code></pre>
+  </section>
+
+  <hr>
+  <p style="text-align:center;">© 2025 Flutter Exam Answers | Prepared by Prashanth</p>
+
+</body>
+</html>
